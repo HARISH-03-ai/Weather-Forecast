@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App - Dark Mode</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen flex items-center justify-center">
+
+  <!-- Screen 1: Landing Page -->
+  <section id="screen1" class="w-full max-w-sm text-center space-y-6">
+    <h1 class="text-4xl font-bold text-blue-400">Weather Forecast</h1>
+    <p class="text-gray-400">Check live weather anytime, anywhere</p>
+    <button class="px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-xl font-semibold transition">
+      Get Started
+    </button>
+  </section>
+
+  <!-- Screen 2: Current Weather -->
+  <section id="screen2" class="hidden w-full max-w-sm space-y-6">
+    <div class="text-center">
+      <h2 class="text-xl font-semibold">Mumbai</h2>
+      <p class="text-gray-400">Today</p>
+      <div class="mt-4">
+        <span class="text-6xl font-bold">29°C</span>
+        <p class="text-blue-400 text-lg">Partly Cloudy</p>
+      </div>
+    </div>
+
+    <!-- Hourly Forecast -->
+    <div class="grid grid-cols-4 gap-3 mt-6">
+      <div class="bg-gray-800 p-3 rounded-lg text-center">
+        <p>10AM</p>
+        <p>☀️</p>
+        <p>30°</p>
+      </div>
+      <div class="bg-gray-800 p-3 rounded-lg text-center">
+        <p>11AM</p>
+        <p>⛅</p>
+        <p>31°</p>
+      </div>
+      <div class="bg-gray-800 p-3 rounded-lg text-center">
+        <p>12PM</p>
+        <p>☁️</p>
+        <p>29°</p>
+      </div>
+      <div class="bg-gray-800 p-3 rounded-lg text-center">
+        <p>1PM</p>
+        <p>🌧️</p>
+        <p>28°</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screen 3: Weekly Forecast -->
+  <section id="screen3" class="hidden w-full max-w-sm space-y-4">
+    <h2 class="text-xl font-semibold text-center">Weekly Forecast</h2>
+    <div class="space-y-3">
+      <div class="flex justify-between bg-gray-800 p-3 rounded-lg">
+        <span>Mon</span><span>☀️</span><span>30° / 25°</span>
+      </div>
+      <div class="flex justify-between bg-gray-800 p-3 rounded-lg">
+        <span>Tue</span><span>⛅</span><span>28° / 24°</span>
+      </div>
+      <div class="flex justify-between bg-gray-800 p-3 rounded-lg">
+        <span>Wed</span><span>🌧️</span><span>27° / 23°</span>
+      </div>
+      <div class="flex justify-between bg-gray-800 p-3 rounded-lg">
+        <span>Thu</span><span>☁️</span><span>29° / 22°</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- JS for Screen Toggle -->
+  <script>
+    const screen1 = document.getElementById("screen1");
+    const screen2 = document.getElementById("screen2");
+    const screen3 = document.getElementById("screen3");
+    const getStartedBtn = screen1.querySelector("button");
+
+    getStartedBtn.addEventListener("click", () => {
+      screen1.classList.add("hidden");
+      screen2.classList.remove("hidden");
+    });
+
+    // Example: Auto move to Screen 3 after 5 sec
+    setTimeout(() => {
+      screen2.classList.add("hidden");
+      screen3.classList.remove("hidden");
+    }, 8000);
+  </script>
+</body>
+</html>
