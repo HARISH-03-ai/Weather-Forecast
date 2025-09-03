@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weather-forecast</title>
+  <!-- Primary Meta Tags -->
+  <meta name="description" content="Live Weather Forecast – Get real-time temperature, humidity, wind speed & 7-day forecast for your location. Accurate predictions to keep you prepared!">
+  <meta name="keywords" content="weather forecast, live weather updates, real-time temperature, rain prediction, weather app, climate report, weather alerts">
+  <meta name="author" content="Harish Vishwakarma">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  <meta name="theme-color" content="#1E90FF">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://yourwebsite.com/">
+
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:title" content="Live Weather Forecast | Real-Time Updates & Accurate Predictions">
+  <meta property="og:description" content="Check live weather updates, accurate forecasts, and real-time temperature for your city. Stay updated anytime!">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourwebsite.com/">
+  <meta property="og:image" content="https://yourwebsite.com/images/weather-preview.png">
+  <meta property="og:site_name" content="Live Weather Forecast">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Live Weather Forecast | Real-Time Updates & Accurate Predictions">
+  <meta name="twitter:description" content="Get accurate real-time weather, temperature, humidity, and forecasts instantly!">
+  <meta name="twitter:image" content="https://yourwebsite.com/images/weather-preview.png">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.lordicon.com/lordicon.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+      .font-poppins {
+        font-family: 'Poppins', sans-serif;
+      }
+      
+      html, body {
+        height: auto;
+        margin: 0;
+        padding: 0;
+        overflow: scroll;
+      }
+      
+      lord-icon:active {
+        opacity: 0.5;
+      }
+      
+      i:active {
+        opacity: 0.5;
+      }
+      
+      #hourlyForecast, .forecast-cards {
+        scrollbar-width: none; /* Firefox ke liye */
+      }
+      
+      #hourlyForecast::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Edge ke liye */
+      }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-indigo-700 via-purple-700 to-indigo-900 min-h-screen">
+  
+  <!-- 1st screen -->
+  <div id="screenone" class="max-w-5xl mx-auto p-4">
+    <div class="flex justify-between items-center m-auto pb-4">
+        <div class="cloud-names flex flex-row text-white text-xl">
+        <h1 class="t1 font-poppins font-bold">Editz</h1>
+        <h1 class="t2 font-bold text-yellow-300">Harshu</h1>
+       </div>
+       
+        <div class="toggleBtn w-10 h-5 flex items-center bg-gray-300 dark:bg-gray-300 rounded-full p-1 cursor-pointer transition-colors duration-500">
+        <div class="cloud w-4 h-4 bg-[#24104f] rounded-full shadow-md transform transition-transform duration-500">
+          <img src="sun.png" alt="cloud" class="cloudImg w-4 h-4 rounded-full">
+        </div>
+      </div>
+    </div>
+    <div class="cloud-emoji flex justify-center items-center">
+      <img src="cloud.png" alt="cloud-image"/>
+    </div>
+    
+    <div class="cloud-names flex flex-col justify-center items-center text-white text-6xl">
+      <h1 class="t1 font-poppins font-bold">Weather</h1>
+      <h1 class="t2 font-bold text-yellow-300">ForeCasts</h1>
+    </div>
+    
+    <div id="getstart" class="flex flex-col justify-center items-center mt-20">
+      <button class="bg-yellow-300 px-12 py-3 font-bold font-poppins rounded-full text-[#6a2ae6] text-xl">Get Start</button>
+    </div>
+  </div>
+  
+  
+  <!--2nd screen -->
+    <div id="screentwo" class="hidden max-w-5xl mx-auto p-4">
+    <div class="flex justify-between items-center m-auto pb-4">
+        <div class="cloud-names flex flex-row text-white text-xl">
+        <h1 class="t1 font-poppins font-bold">Editz</h1>
+        <h1 class="t2 font-bold text-yellow-300">Harshu</h1>
+       </div>
+       
+      <div class="toggleBtn w-10 h-5 flex items-center bg-gray-300 dark:bg-gray-300 rounded-full p-1 cursor-pointer transition-colors duration-500">
+        <div class="cloud w-4 h-4 bg-[#24104f] rounded-full shadow-md transform transition-transform duration-500">
+          <img src="sun.png" alt="cloud" class="cloudImg w-4 h-4 rounded-full">
+        </div>
+      </div>
+    </div>
+    
+    
+      <div class="flex items-center gap-2">
+        <input id="search" placeholder="Search city…" class="w-full px-4 py-3 rounded-2xl text-gray-900 font-poppins font-bold" />
+        <button id="searchBtn" class="px-4 py-3 rounded-2xl bg-white/20 text-white font-bold font-poppins">Search</button>
+      </div>
+      <div class="min-h-60 overflow-auto px-2 mt-2">
+        <ul id="suggestions" class="mt-2 grid gap-2 "></ul>
+      </div>
+       
+      <div class="fixed bottom-0 left-0 right-0 w-[100%] flex justify-around items-center h-[70px]">
+        <div id="locBtn">
+            <lord-icon
+                src="https://cdn.lordicon.com/bpmglzll.json"
+                trigger="hover"
+                colors="primary:#ffffff"
+                style="height: 40px; width: 40px;">
+            </lord-icon>
+        </div>
+        <div id="plusBtn">
+          <lord-icon
+              src="https://cdn.lordicon.com/sqmqtgjh.json"
+              trigger="hover"
+              colors="primary:#8930e8,secondary:#ffffff"
+              style="height: 40px; width: 40px;">
+          </lord-icon>
+        </div>
+        <div id="menuBtn">
+          <i class="fa-solid fa-bars text-white text-[32px]"></i>
+        </div>
+      </div>
+  </div>
+  
+  <!--screen 3-->
+  <div id="screenthree" class="hidden h-[86vh] flex flex-col bg-gradient-to-br from-indigo-700 via-purple-700 to-indigo-900">
+  
+  <!-- Sticky Header -->
+  <div id="cityManagement" class="flex justify-between items-center px-4 py-3 bg-gradient-to-br from-indigo-700 via-purple-700 to-indigo-900 sticky top-0 z-10">
+    <div class="flex items-center gap-[10px]">
+      <div id="backBtn">
+        <lord-icon
+            src="https://cdn.lordicon.com/dcyiaoek.json"
+            trigger="hover"
+            colors="primary:#ffffff"
+            style="width:20px;height:20px;display:block">
+        </lord-icon>
+      </div>
+      <div class="font-bold font-poppins text-white">
+        <h1>City Management</h1>
+      </div>
+    </div>
+    
+    <div id="editBtn">
+      <lord-icon
+          src="https://cdn.lordicon.com/nwfpiryp.json"
+          trigger="hover"
+          colors="primary:#ebe6ef,secondary:#e4e4e4,tertiary:#ffffff,quaternary:#ffffff"
+          style="width:25px;height:25px;display:block">
+      </lord-icon>
+    </div>
+  </div>
+  
+  <div id="selectAllBtn" class="flex items-center p-4 gap-[10px]">
+    <div id="Btn" class="gaurav border border-white h-4 w-4 flex justify-center items-center">
+      <div id="rightClick" class="text-white text-[12px] hidden">
+        <i class="fa-solid fa-check"></i>
+      </div>
+    </div>
+    <div class="font-bold font-poppins text-white">
+      <h1>Select all</h1>
+    </div>
+  </div>
+  
+  <!-- Scrollable Cards -->
+  <div id="cardsContainer" 
+       class="flex-1 overflow-y-scroll m-auto"
+       style="-webkit-overflow-scrolling: touch; scroll-behavior: smooth;">
+    <!-- Tumhare cards yaha honge -->
+  </div>
+  
+  <div class="deleteBtn w-[100vw] h-[8vh] fixed bottom-0 flex justify-center items-center border border-white/10 rounded-xl z-10 bg-gradient-to-br from-indigo-700 via-purple-700 to-indigo-900">
+    <div class="binBtn opacity-50">
+      <lord-icon
+          src="https://cdn.lordicon.com/egqwwrlq.json"
+          trigger="hover"
+          colors="primary:#000000,secondary:#e4e4e4,tertiary:#000000,quaternary:#000000"
+          style="width:40px;height:40px;">
+      </lord-icon>
+    </div>
+  </div>
+</div>
+
+<!--screenFour-->
+<div id="screenfour" class="hidden min-h-screen bg-gradient-to-br from-indigo-700 via-purple-700 to-indigo-900 p-4">
+  
+  <div class="flex items-center gap-[10px]">
+      <div id="backBtnTwo">
+        <lord-icon
+            src="https://cdn.lordicon.com/dcyiaoek.json"
+            trigger="hover"
+            colors="primary:#ffffff"
+            style="width:20px;height:20px;display:block">
+        </lord-icon>
+      </div>
+      <div class="cloud-names flex flex-row text-white text-xl">
+        <h1 class="t1 font-poppins font-bold">Editz</h1>
+        <h1 class="t2 font-bold text-yellow-300">Harshu</h1>
+       </div>
+    </div>
+    
+    
+  <div class="flex flex-col justify-center items-center">
+  <div class="cloud justify-center items-center w-full">
+         <img src="cloud.png" alt="cloud" class="h-[200px] m-[auto]"/>
+  </div>
+  
+  <div class="temperature flex items-center text-white font-poppins font-bold text-5xl">
+    <h1 id="temp">19</h1>
+    <h1>°</h1>
+  </div>
+  
+  <div class="precipitation flex flex-col justiy-center items-center text-xl font-bold text-white font-poppins">
+    <p id="cityName">Precipitation</p>
+    <div class="max-min flex gap-[20px] p-1">
+      <div class="max flex">
+        <p>Max:</p>
+        <p id="maxTemp">24</p>
+        <p>°</p>
+      </div>
+      
+      <div class="min flex">
+        <p>Min:</p>
+        <p id="minTemp">18</p>
+        <p>°</p>
+      </div>
+    </div>
+  </div>
+  
+  <div id="today" class="w-[90vw] bg-gradient-to-br from-indigo-700 via-purple-700 to-indigo-900 rounded-[30px] shadow-[0_0_10px_3px_rgba(0,0,0,0.3)] my-5">
+  <!-- Date Row -->
+  <div class="flex justify-between w-[80%] mx-auto text-white py-4 font-poppins font-bold">
+    <p id="dayName">Today</p>
+    <p id="date">July, 21</p>
+  </div>
+
+  <!-- Line -->
+  <div class="border border-white"></div>
+
+  <!-- Main Cards -->
+  <div id="hourlyForecast" class="flex justify-evenly items-center py-4 overflow-scroll">
+    <!--cards appear here hourlyForecast-->
+  </div>
+</div>
+</div>
+
+  <div>
+    <h1 class="text-white font-poppins font-bold text-xl pl-4">7-Days Forecasts</h1>
+    <div class="flex justify-evenly items-center">
+      
+      <div class="previous text-white text-3xl">
+          <i class="fa-solid fa-angle-left"></i>
+        </div>
+        
+      <div class="forecast-cards flex items-center py-4 overflow-auto gap-[10px]">
+        <!--cards appear here-->
+      </div>
+      
+      <div class="forward text-white text-3xl">
+        <i class="fa-solid fa-angle-right"></i>
+      </div>
+      
+    </div>
+ </div>
+  
+  <div class="flex justify-center items-center">
+    <div id="airQualityIndexId" class="w-[90vw] bg-gradient-to-br from-indigo-700 via-purple-700 to-indigo-900 rounded-[30px] shadow-[0_0_10px_3px_rgba(0,0,0,0.3)] my-5 h-[20vh] p-3">
+      
+      <div class="flex items-center m-2 pb-2 gap-[10px]">
+        <div class="text-white text-2xl">
+          <i class="fa-solid fa-crosshairs"></i>
+        </div>
+        <div class="text-white font-bold font-poppins">
+          <h1>AIR QUALITY</h1>
+        </div>
+      </div>
+      
+      <div class="text-white text-2xl font-poppins font-bold">
+        <h1 id="airQualityValue">3-Low Health Risk</h1>
+      </div>
+      
+      <div class="min-w-screen h-1 bg-white shadow-lg my-4"></div>
+      
+      <div id="seeMoreBtn" class="flex justify-between items-center px-4">
+        <div class="font-bold text-white text-lg">
+          <h1>See more</h1>
+        </div>
+        <div class="text-white text-3xl">
+          <i class="fa-solid fa-angle-right"></i>
+        </div>
+      </div>
+    </div>
+ </div>
+</div>
+
+<!--screenfive-->
+  <div id="screenFive" class="hidden p-4 bg-gradient-to-br from-indigo-700 via-purple-700 to-indigo-900 min-h-screen text-white rounded-xl">
+    
+      <!-- Title -->
+   <div class="flex items-center gap-[10px] p-2 mb-2">
+      <div id="backBtnThree">
+        <lord-icon
+            src="https://cdn.lordicon.com/dcyiaoek.json"
+            trigger="hover"
+            colors="primary:#ffffff"
+            style="width:20px;height:20px;display:block">
+        </lord-icon>
+      </div>
+      <div class="font-bold font-poppins text-white text-xl">
+        <h1 id="cityTitle">Air Quality Index</h1>
+      </div>
+    </div>
+  
+  <!-- Overall AQI -->
+  <div class="bg-white/10 rounded-2xl p-4 mb-6 shadow-lg">
+    <div class="flex justify-between items-center">
+      <div>
+        <h2 class="text-lg font-semibold">Overall AQI</h2>
+        <p id="overallAQI" class="text-4xl font-bold text-green-400">--</p>
+        <p id="overallRisk" class="text-sm">--</p>
+      </div>
+      <span class="text-yellow-300 text-3xl">⚠️</span>
+    </div>
+    <div class="w-full bg-white/20 rounded-full h-2 mt-4">
+      <div id="overallBar" class="bg-green-400 h-2 rounded-full" style="width:20%"></div>
+    </div>
+  </div>
+  
+  <!-- Pollutants Breakdown -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    
+    <div class="bg-white/10 rounded-2xl p-4">
+      <h3 class="text-lg font-semibold">PM2.5</h3>
+      <p id="pm25Value" class="text-2xl font-bold text-green-400">--</p>
+      <div class="w-full bg-white/20 rounded-full h-2 mt-2">
+        <div id="pm25Bar" class="bg-green-400 h-2 rounded-full" style="width:12%"></div>
+      </div>
+    </div>
+    
+    <div class="bg-white/10 rounded-2xl p-4">
+      <h3 class="text-lg font-semibold">PM10</h3>
+      <p id="pm10Value" class="text-2xl font-bold text-green-400">--</p>
+      <div class="w-full bg-white/20 rounded-full h-2 mt-2">
+        <div id="pm10Bar" class="bg-green-400 h-2 rounded-full" style="width:25%"></div>
+      </div>
+    </div>
+    
+    <div class="bg-white/10 rounded-2xl p-4">
+      <h3 class="text-lg font-semibold">Ozone (O₃)</h3>
+      <p id="o3Value" class="text-2xl font-bold text-yellow-400">--</p>
+      <div class="w-full bg-white/20 rounded-full h-2 mt-2">
+        <div id="o3Bar" class="bg-yellow-400 h-2 rounded-full" style="width:40%"></div>
+      </div>
+    </div>
+    
+    <div class="bg-white/10 rounded-2xl p-4">
+      <h3 class="text-lg font-semibold">Nitrogen Dioxide (NO₂)</h3>
+      <p id="no2Value" class="text-2xl font-bold text-green-400">--</p>
+      <div class="w-full bg-white/20 rounded-full h-2 mt-2">
+        <div id="no2Bar" class="bg-green-400 h-2 rounded-full" style="width:15%"></div>
+      </div>
+    </div>
+    
+    <div class="bg-white/10 rounded-2xl p-4">
+      <h3 class="text-lg font-semibold">Carbon Monoxide (CO)</h3>
+      <p id="coValue" class="text-2xl font-bold text-green-400">--</p>
+      <div class="w-full bg-white/20 rounded-full h-2 mt-2">
+        <div id="coBar" class="bg-green-400 h-2 rounded-full" style="width:5%"></div>
+      </div>
+    </div>
+    
+    <div class="bg-white/10 rounded-2xl p-4">
+      <h3 class="text-lg font-semibold">Sulfur Dioxide (SO₂)</h3>
+      <p id="so2Value" class="text-2xl font-bold text-green-400">--</p>
+      <div class="w-full bg-white/20 rounded-full h-2 mt-2">
+        <div id="so2Bar" class="bg-green-400 h-2 rounded-full" style="width:5%"></div>
+      </div>
+    </div>
+    
+  </div>
+  
+  <!-- Health Advice -->
+  <div class="bg-white/10 rounded-2xl p-4 mt-6 shadow-lg">
+    <h2 class="text-lg font-semibold mb-2">Health Recommendations</h2>
+    <ul class="list-disc list-inside text-sm space-y-2">
+      <li>Air quality is good, no major health risks.</li>
+      <li>Sensitive groups (asthma, elderly) should avoid long outdoor exposure.</li>
+      <li>Enjoy outdoor activities freely.</li>
+    </ul>
+  </div>
+</div>
+  
+  <!-- screensix -->
+  <div id="screenSix" class="hidden min-h-screen bg-gradient-to-br from-indigo-700 via-purple-700 to-indigo-900 flex flex-col items-center justify-center p-6 text-white">
+  
+  <!-- Card Container -->
+  <div class="w-full max-w-md bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl p-6 space-y-6">
+    
+    <!-- App Title -->
+    <div class="text-center">
+      <h1 class="text-3xl font-bold bg-gradient-to-r from-yellow-300 to-pink-400 bg-clip-text text-transparent">🌤 Weather Forecast</h1>
+      <p class="text-gray-300 mt-1">Version 1.0.0</p>
+    </div>
+
+    <!-- Developer -->
+    <div class="bg-white/5 p-4 rounded-xl shadow-md">
+      <h2 class="text-lg font-bold font-poppins">👨‍💻 Developer</h2>
+      <p class="text-gray-200 font-bold pl-6">EditzHarshu</p>
+    </div>
+
+    <!-- Features -->
+    <div class="bg-white/5 p-4 rounded-xl shadow-md">
+      <h2 class="text-lg font-bold font-poppins">📌 Features</h2>
+      <ul class="list-disc list-inside text-gray-200 space-y-1 font-bold">
+        <li>Live Weather Updates</li>
+        <li>Hourly & Weekly Forecast</li>
+        <li>Air Quality Index (AQI)</li>
+        <li>GPS-based Location Support</li>
+      </ul>
+    </div>
+
+    <!-- Thanks -->
+    <div class="bg-white/5 p-4 rounded-xl shadow-md">
+      <h2 class="text-lg font-bold font-poppins">❤️ Special Thanks</h2>
+      <ul class="list-disc list-inside text-gray-200 space-y-1 font-bold">
+        <li>OpenWeather API</li>
+        <li>BigDataCloud API</li>
+        <li>CWH :- CodeWithHarry</li>
+        <li>SPCK EDITOR</li>
+      </ul>
+    </div>
+
+    <!-- Follow -->
+    <div class="bg-white/5 p-4 rounded-xl shadow-md text-center">
+      <h2 class="text-lg font-bold font-poppins mb-2">🔗 Follow Us & Contact Us</h2>
+      <div class="flex justify-center space-x-4">
+        <a href="https://www.instagram.com/_v.harshu_?igsh=MW9jMG9zbzE2dmh6cg==" class="bg-white/20 hover:bg-white/30 p-3 rounded-full">
+          <div>
+            <lord-icon
+                src="https://cdn.lordicon.com/wgtaryar.json"
+                trigger="hover"
+                style="width:20px;height:20px;display: block">
+            </lord-icon>
+          </div>
+        </a>
+        
+        <a href="https://wa.me/919970839647?text=*Hello EditzHarshu*" class="bg-white/20 hover:bg-white/30 p-3 rounded-full">
+          <div>
+            <lord-icon
+                src="https://cdn.lordicon.com/edecmgef.json"
+                trigger="hover"
+                colors="primary:#30e849,secondary:#ebe6ef"
+                style="width:20px;height:20px;display: block">
+            </lord-icon>
+          </div>
+        </a>
+        
+        
+        <a href="mailto:hv399106@gamil.com" class="bg-white/20 hover:bg-white/30 p-3 rounded-full">
+          <div>
+            <lord-icon
+                src="https://cdn.lordicon.com/ozlkyfxg.json"
+                trigger="hover"
+                stroke="bold"
+                colors="primary:#ffffff,secondary:#e83a30"
+                style="width:20px;height:20px;display: block">
+            </lord-icon>
+          </div>
+        </a>
+        
+        <a href="https://x.com/HarishV39648465?t=kM28M9GxJlY3mdcjvQ4clg&s=09" class="bg-white/20 hover:bg-white/30 p-3 rounded-full">
+          <div>
+            <lord-icon
+                src="https://cdn.lordicon.com/cbxaxfqs.json"
+                trigger="hover"
+                style="width:20px;height:20px;display: block">
+            </lord-icon>
+          </div>
+        </a>
+        
+        <a href="https://www.linkedin.com/in/harish-vishwakarma-59a648273?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="bg-white/20 hover:bg-white/30 p-3 rounded-full">
+          <div>
+            <lord-icon
+                src="https://cdn.lordicon.com/fgctxlnd.json"
+                trigger="hover"
+                style="width:20px;height:20px;display: block">
+            </lord-icon>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <p class="mt-6 text-sm text-gray-300 font-poppins ">⚡ Made with ❤️ by EditzHarshu ⚡</p>
+</div>
+</body>
+ <script src="main.js" type="text/javascript" charset="utf-8"></script>
+</html>
