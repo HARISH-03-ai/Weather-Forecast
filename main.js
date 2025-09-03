@@ -773,7 +773,7 @@ async function getWeather(city) {
           <p>${temp}</p><p>°C</p>
         </div>
         <div>
-          <img src="icons/${icon}" alt="weather" class="w-[50px]" />
+          <img src="${icon}" alt="weather" class="w-[50px]" />
         </div>
         <div class="flex justify-center items-center text-white font-bold">
           <p>${time.getHours().toString().padStart(2, "0")}</p>
